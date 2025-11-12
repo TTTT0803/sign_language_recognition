@@ -1,24 +1,27 @@
+// src/components/layout/Header/index.jsx
 import React from 'react';
-import { Link } from 'react-router-dom'; // <-- Dùng Link
+import { NavLink } from 'react-router-dom';
 
-function Header() {
+const Header = () => {
   return (
-    <header className="header-container">
-      <div className="logo">
-        <Link to="/">Logo Dự Án</Link>
+    <header className="header">
+      <div className="header-container">
+        <NavLink to="/" className="logo">
+          <span role="img" aria-label="logo" style={{ fontSize: '2rem' }}>☝️</span>
+        </NavLink>
+        <nav className="nav-menu">
+          <NavLink to="/">Trang chủ</NavLink>
+          <NavLink to="/su-dung">Sử dụng</NavLink>
+          <NavLink to="/tin-tuc">Tin tức</NavLink>
+          <NavLink to="/lien-he">Liên hệ</NavLink>
+        </nav>
+        <div className="auth-buttons">
+          <button className="btn btn-register">Đăng ký</button>
+          <button className="btn btn-login">Đăng nhập</button>
+        </div>
       </div>
-      <nav className="navigation">
-        <ul>
-          <li>
-            <Link to="/">Trang chủ</Link>
-          </li>
-          <li>
-            <Link to="/about">Giới thiệu</Link> {/* (Sẽ không hoạt động cho đến khi bạn tạo trang About) */}
-          </li>
-        </ul>
-      </nav>
     </header>
   );
-}
+};
 
 export default Header;

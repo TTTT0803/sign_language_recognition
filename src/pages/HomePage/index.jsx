@@ -1,12 +1,30 @@
+// src/pages/HomePage/index.jsx
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link
+import backgroundImage from '../../assets/images/background.png'; 
 
-function HomePage() {
+const Homepage = () => {
   return (
-    <div className="page-container" style={{ padding: '2rem', minHeight: '60vh', textAlign: 'center' }}>
-      <h1>Đây là Trang Chủ (HomePage)</h1>
-      <p>Nội dung này đến từ file <b>pages/HomePage/index.jsx</b>.</p>
-    </div>
+    <section 
+      className="hero" 
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <div className="hero-content">
+        <h1>
+          ỨNG DỤNG NHẬN DẠNG
+          <br />
+          NGÔN NGỮ KÝ HIỆU VIỆT NAM
+        </h1>
+        <p>Kết nối cộng đồng, phá bỏ rào cản giao tiếp</p>
+        
+        {/* THÊM NÚT NÀY VÀO */}
+        <Link to="/su-dung" className="cta-button">
+          Thử ngay
+        </Link>
+        
+      </div>
+    </section>
   );
-}
+};
 
-export default HomePage;
+export default Homepage;

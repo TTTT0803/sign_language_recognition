@@ -1,13 +1,12 @@
+// src/components/layout/Footer/index.jsx
 import React from 'react';
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer className="footer-container">
-      <div className="footer-content">
-        <p>&copy; 2025 Dự án của bạn.</p>
-      </div>
+    <footer className="footer">
+      <p>&copy; 2025 Ứng dụng nhận dạng ngôn ngữ ký hiệu. Đã đăng ký Bản quyền.</p>
     </footer>
   );
-}
+};
 
 export default Footer;

@@ -1,19 +1,19 @@
+// src/components/layout/Layout/index.jsx
 import React from 'react';
-import { Outlet } from 'react-router-dom'; // <-- Chỗ trống cho nội dung
-import Header from '../Header';
-import Footer from '../Footer';
+import { Outlet } from 'react-router-dom';
+import Header from '../Header'; // Import từ thư mục Header
+import Footer from '../Footer'; // Import từ thư mục Footer
 
-function Layout() {
+const Layout = () => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <main>
-        {/* HomePage sẽ "nhảy" vào đây */}
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
-}
+};
 
 export default Layout;
