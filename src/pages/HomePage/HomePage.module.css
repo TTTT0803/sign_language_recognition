@@ -1,0 +1,107 @@
+/* === STYLES CHO HERO SECTION === */
+.hero {
+  min-height: calc(100vh - 70px); /* Bỏ 60px footer đi để nó cao hơn */
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+.heroContent {
+  padding-left: 10%;
+  max-width: 600px;
+  color: #495057;
+  animation: fadeInFromLeft 0.8s ease-out forwards;
+}
+.heroContent h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+.heroContent p {
+  font-size: 1.25rem;
+  color: #495057;
+  margin-bottom: 2rem;
+}
+.ctaButton {
+  background-color: #333a45;
+  color: white;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.ctaButton:hover {
+  background-color: #1a1e24;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* === STYLES CHO PHẦN TÍNH NĂNG MỚI === */
+.featuresSection {
+  background-color: #ffffff;
+  padding: 4rem 2rem; /* Tăng padding */
+}
+.featuresContainer {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  gap: 3rem; /* Tăng khoảng cách giữa 2 cột */
+}
+.featuresColumn,
+.howItWorksColumn {
+  flex: 1; /* Mỗi cột chiếm 50% */
+}
+.sectionTitle {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #333a45;
+  display: inline-block; /* Để border-bottom vừa vặn với chữ */
+}
+.featureItem {
+  display: flex;
+  align-items: flex-start; /* Căn icon và text ở trên cùng */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.featureIcon {
+  font-size: 2.2rem; /* Tăng kích thước icon */
+  color: #333a45;
+  margin-top: 5px; /* Căn chỉnh icon */
+}
+.featureItem h3 {
+  font-size: 1.2rem; /* 18px */
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+.featureItem p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* === KEYFRAME ANIMATION === */
+@keyframes fadeInFromLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 4rem 0;
+  }
+  .featuresContainer {
+    flex-direction: column;
+  }
+}

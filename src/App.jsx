@@ -3,17 +3,18 @@ import { Routes, Route } from 'react-router-dom'; // <-- 1. Xóa 'BrowserRouter'
 import Layout from './components/layout/Layout';
 import Homepage from './pages/HomePage';
 import './App.css';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
-    // 2. Xóa <BrowserRouter> bọc ngoài
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Homepage />} />
-        {/* <Route path="su-dung" element={...} /> */}
+        <Route path='/dangnhap' element={<LoginPage />} />
+        <Route path='/dang-ky' element={<RegisterPage />} />
       </Route>
     </Routes>
-    // Xóa </BrowserRouter> ở đây
   );
 }
 

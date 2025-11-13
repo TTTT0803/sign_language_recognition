@@ -20,8 +20,12 @@ const Header = () => {
           <NavLink to="/lien-he">Liên hệ</NavLink>
         </nav>
         <div className="auth-buttons">
-          <button className="btn btn-register">Đăng ký</button>
-          <button className="btn btn-login">Đăng nhập</button>
+          <NavLink to="/dang-ky" className="btn btn-register">
+            Đăng ký
+          </NavLink>
+          <NavLink to="/dangnhap" className="btn btn-login">
+            Đăng nhập
+          </NavLink>
         </div>
       </div>
     </header>
