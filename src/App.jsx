@@ -5,6 +5,7 @@ import Homepage from './pages/HomePage';
 import './App.css';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import UsePage from './pages/UsePage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route index element={<Homepage />} />
         <Route path='/dangnhap' element={<LoginPage />} />
         <Route path='/dang-ky' element={<RegisterPage />} />
+        <Route path='/su-dung' element={<UsePage />} />
       </Route>
     </Routes>
   );
