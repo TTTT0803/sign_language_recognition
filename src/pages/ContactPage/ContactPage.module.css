@@ -1,0 +1,147 @@
+/* src/pages/ContactPage/ContactPage.module.css */
+
+.contactPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 130px);
+  padding: 3rem 2rem;
+  /* Dùng lại nền gradient */
+  background: linear-gradient(120deg, #e0f7fa 0%, #f0e6ff 100%);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.contactContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  gap: 3rem;
+}
+
+/* === CỘT BÊN TRÁI (THÔNG TIN) === */
+.infoColumn {
+  flex: 1;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #333a45;
+  display: inline-block;
+}
+
+.infoBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.infoIcon {
+  font-size: 2rem;
+  color: #333a45;
+  margin-top: 5px;
+}
+
+.infoBlock p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* === CỘT BÊN PHẢI (FORM) === */
+.formColumn {
+  flex: 1.5; /* Cho cột form rộng hơn */
+  display: flex;
+  gap: 2rem;
+}
+
+.contactForm {
+  flex: 1;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333a45;
+  margin-bottom: 0.5rem;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #333a45;
+  box-shadow: 0 0 0 2px rgba(51, 58, 69, 0.1);
+}
+
+.formTextarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #333a45;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.submitButton:hover {
+  background-color: #1a1e24;
+}
+
+.agentImage {
+  flex: 1;
+  max-width: 250px;
+  align-self: flex-end; /* Đẩy ảnh xuống dưới */
+}
+.agentImage img {
+  width: 100%;
+  height: auto;
+}
+
+/* Keyframe cho animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 992px) {
+  .contactContainer {
+    flex-direction: column;
+  }
+  .formColumn {
+    flex-direction: column-reverse; /* Đảo ngược form và ảnh */
+    align-items: center;
+  }
+  .agentImage {
+    max-width: 200px;
+    align-self: center;
+  }
+}
