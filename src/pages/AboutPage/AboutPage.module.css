@@ -1,0 +1,113 @@
+/* src/pages/AboutPage/AboutPage.module.css */
+
+.aboutPage {
+  min-height: calc(100vh - 130px);
+  padding: 3rem 2rem;
+  /* Dùng lại nền gradient */
+  background: linear-gradient(120deg, #e0f7fa 0%, #f0e6ff 100%);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.pageContainer {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* === PHẦN HERO === */
+.heroSection {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.heroContent {
+  flex: 1.5; /* Cho text nhiều không gian hơn */
+}
+
+.heroContent p {
+  font-size: 1.2rem; /* Tăng cỡ chữ cho dễ đọc */
+  color: #2c3e50;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.heroImage {
+  flex: 1;
+  text-align: center;
+}
+.heroImage img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+}
+
+/* === LƯỚI TÍNH NĂNG (2x2) === */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.7); /* Nền mờ */
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+.featureCard:hover {
+  transform: translateY(-5px);
+}
+
+.iconWrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0; /* Giúp icon không bị bóp méo */
+}
+/* Màu riêng cho từng icon */
+.iconIdea { background-color: #f59e0b; } /* Vàng */
+.iconMission { background-color: #ef4444; } /* Đỏ */
+.iconTeam { background-color: #3b82f6; } /* Xanh */
+.iconFuture { background-color: #8a2be2; } /* Tím */
+
+.cardContent h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 0.5rem;
+}
+.cardContent p {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Keyframe cho animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 992px) {
+  .heroSection {
+    flex-direction: column-reverse; /* Đảo ngược ảnh lên trên */
+  }
+}
+@media (max-width: 768px) {
+  .featuresGrid {
+    grid-template-columns: 1fr; /* 1 cột trên di động */
+  }
+}

@@ -17,6 +17,7 @@ const Header = () => {
           <NavLink to="/">Trang chủ</NavLink>
           <NavLink to="/su-dung">Sử dụng</NavLink>
           <NavLink to="/tin-tuc">Tin tức</NavLink>
+          <NavLink to="/about-me">Về chúng tôi</NavLink>
           <NavLink to="/lien-he">Liên hệ</NavLink>
         </nav>
         <div className="auth-buttons">

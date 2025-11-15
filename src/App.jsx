@@ -8,6 +8,8 @@ import RegisterPage from './pages/RegisterPage';
 import UsePage from './pages/UsePage';
 import NewsPage from './pages/NewsPage';
 import ContactPage from './pages/ContactPage'
+import AboutPage from './pages/AboutPage'
+
 function App() {
   return (
     <Routes>
@@ -18,6 +20,7 @@ function App() {
         <Route path='/su-dung' element={<UsePage />} />
         <Route path='/tin-tuc' element={<NewsPage />} /> 
         <Route path='/lien-he' element={<ContactPage />} /> 
+        <Route path='/about-me' element={<AboutPage />} /> 
       </Route>
     </Routes>
   );
