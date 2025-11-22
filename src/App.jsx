@@ -9,7 +9,7 @@ import UsePage from './pages/UsePage';
 import NewsPage from './pages/NewsPage';
 import ContactPage from './pages/ContactPage'
 import AboutPage from './pages/AboutPage'
-
+import DictionaryPage from './pages/DictionaryPage';
 function App() {
   return (
     <Routes>
@@ -21,6 +21,7 @@ function App() {
         <Route path='/tin-tuc' element={<NewsPage />} /> 
         <Route path='/lien-he' element={<ContactPage />} /> 
         <Route path='/about-me' element={<AboutPage />} /> 
+        <Route path="/kho-tu-dien" element={<DictionaryPage />} />
       </Route>
     </Routes>
   );

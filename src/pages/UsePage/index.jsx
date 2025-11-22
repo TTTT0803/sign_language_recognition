@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import styles from './UsePage.module.css';
-import { FaVolumeUp, FaVolumeMute, FaBackspace, FaSpaceShuttle, FaPlus, FaPlayCircle } from 'react-icons/fa';
+import { FaVolumeUp, FaVolumeMute, FaBackspace, FaPlus, FaPlayCircle } from 'react-icons/fa';
 
 const UsePage = () => {
+  const navigate = useNavigate();
+
   const [detectedText, setDetectedText] = useState("...");
-  const [sentence, setSentence] = useState(""); // <--- Biến lưu câu đang ghép
+  const [sentence, setSentence] = useState("");
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   const VIDEO_STREAM_URL = "http://localhost:5000/video_feed";
   const STATUS_API_URL = "http://localhost:5000/api/status";
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('user_info');
+
+    if (!userInfo) {
+      alert("Vui lòng đăng nhập để sử dụng tính năng này!");
+      navigate('/dangnhap'); 
+    } else {
+      setIsAuthorized(true);
+    }
+  }, [navigate]);
 
   // --- HÀM ĐỌC (Text to Speech) ---
   const speak = (text) => {
@@ -20,31 +35,31 @@ const UsePage = () => {
     window.speechSynthesis.speak(utterance);
   };
 
-  // --- 1. HÀM THÊM CHỮ VÀO CÂU ---
+  // --- CÁC HÀM XỬ LÝ CÂU ---
   const addLetterToSentence = () => {
     if (detectedText !== "..." && detectedText !== "") {
         setSentence(prev => prev + detectedText);
-        speak(detectedText); // Đọc chữ vừa thêm
+        speak(detectedText);
     }
   };
 
-  // --- 2. HÀM THÊM KHOẢNG TRẮNG ---
   const addSpace = () => {
     setSentence(prev => prev + " ");
   };
 
-  // --- 3. HÀM XÓA KÝ TỰ CUỐI ---
   const deleteLastChar = () => {
     setSentence(prev => prev.slice(0, -1));
   };
 
-  // --- 4. HÀM ĐỌC CẢ CÂU ---
   const speakSentence = () => {
     speak(sentence);
   };
 
   // --- LẤY DỮ LIỆU TỪ PYTHON ---
   useEffect(() => {
+    // Chỉ chạy API nếu đã đăng nhập thành công
+    if (!isAuthorized) return;
+
     const intervalId = setInterval(async () => {
       try {
         const response = await fetch(STATUS_API_URL);
@@ -56,30 +71,36 @@ const UsePage = () => {
     }, 500);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isAuthorized]); // Thêm dependency isAuthorized
 
-  // --- XỬ LÝ PHÍM TẮT (Cho tiện dụng) ---
+  // --- XỬ LÝ PHÍM TẮT ---
   useEffect(() => {
+    if (!isAuthorized) return;
+
     const handleKeyDown = (e) => {
       if (e.code === 'Space') {
-        // Bấm phím CÁCH để thêm chữ hiện tại vào câu
-        e.preventDefault(); // Chặn cuộn trang
+        e.preventDefault();
         addLetterToSentence();
       }
       if (e.code === 'Enter') {
-        // Bấm ENTER để thêm khoảng trắng
         addSpace();
       }
       if (e.code === 'Backspace') {
-        // Bấm XÓA để xóa chữ
         deleteLastChar();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [detectedText]); // Cập nhật để lấy đúng detectedText hiện tại
+  }, [detectedText, isAuthorized]);
 
+  // --- 4. CHẶN HIỂN THỊ NẾU CHƯA ĐĂNG NHẬP ---
+  // Nếu chưa kiểm tra xong quyền, trả về null (màn hình trắng) hoặc Loading
+  if (!isAuthorized) {
+    return null; 
+  }
+
+  // --- PHẦN GIAO DIỆN CHÍNH (GIỮ NGUYÊN) ---
   return (
     <div className={styles.usePageContainer}>
       
@@ -91,7 +112,6 @@ const UsePage = () => {
           style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '15px', border: '2px solid #333' }} 
         />
         
-        {/* Nút Loa */}
         <button 
           onClick={() => setIsSoundOn(!isSoundOn)}
           style={{ position: 'absolute', top: '20px', right: '20px', padding: '10px', borderRadius: '50%', border: 'none', backgroundColor: 'rgba(0,0,0,0.6)', color: 'white', cursor: 'pointer', fontSize: '20px' }}
@@ -104,7 +124,6 @@ const UsePage = () => {
       <div className={styles.resultsColumn}>
         <div className={styles.resultsPanel} style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '20px' }}>
           
-          {/* PHẦN 1: AI ĐANG NHÌN THẤY GÌ */}
           <div style={{ flex: 1, textAlign: 'center', borderBottom: '1px solid #ccc' }}>
             <h3 style={{ color: '#888' }}>AI Đang Thấy:</h3>
             <p style={{ fontSize: '100px', fontWeight: 'bold', color: '#007bff', margin: '10px 0' }}>
@@ -113,11 +132,9 @@ const UsePage = () => {
             <p style={{ fontStyle: 'italic', fontSize: '14px' }}>Bấm phím <b>SPACE</b> để chọn chữ này</p>
           </div>
 
-          {/* PHẦN 2: CÂU ĐANG GHÉP (NỐI CHỮ) */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <h3 style={{ color: '#555' }}>Câu Của Bạn:</h3>
             
-            {/* Ô hiển thị câu */}
             <div style={{ 
                 minHeight: '60px', 
                 backgroundColor: '#f8f9fa', 
@@ -134,9 +151,7 @@ const UsePage = () => {
                 {sentence || <span style={{color: '#ccc', fontWeight: 'normal'}}>Chưa có nội dung...</span>}
             </div>
 
-            {/* CÁC NÚT ĐIỀU KHIỂN */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                
                 <button onClick={addLetterToSentence} style={btnStylePrimary}>
                     <FaPlus /> Thêm Chữ ({detectedText})
                 </button>
@@ -165,7 +180,7 @@ const UsePage = () => {
   );
 };
 
-// --- CSS Nhanh (Bạn có thể đưa vào file module.css) ---
+// CSS Styles
 const btnStylePrimary = { padding: '10px', cursor: 'pointer', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' };
 const btnStyleSecondary = { padding: '10px', cursor: 'pointer', backgroundColor: '#6c757d', color: 'white', border: 'none', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' };
 const btnStyleDanger = { padding: '10px', cursor: 'pointer', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' };
