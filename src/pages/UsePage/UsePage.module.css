@@ -194,3 +194,15 @@
     max-width: none;
   }
 }
+/* Trong file UsePage.module.css */
+
+.videoFeed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+
+    /* --- THÊM DÒNG NÀY --- */
+    transform: scaleX(-1); /* Lật ngược ảnh lại */
+    /* --------------------- */
+}
